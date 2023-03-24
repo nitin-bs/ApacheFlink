@@ -10,7 +10,7 @@ import org.apache.flink.util.Collector;
 public class FilterMovies {
     public static void main(String[] args) throws Exception {
     ExecutionEnvironment env=ExecutionEnvironment.getExecutionEnvironment();
-    DataSet<Tuple3<Long, String, String>> lines = env.readCsvFile("/Users/nitin.bs/Downloads/ml-latest-small/movies.csv")
+    DataSet<Tuple3<Long, String, String>> lines = env.readCsvFile("./input_files/movies.csv")
             .ignoreFirstLine()
             .parseQuotedStrings('"')
             .ignoreInvalidLines()
@@ -29,7 +29,7 @@ public class FilterMovies {
             return movie.getGenres().contains("Drama");
         }
     });
-        filteredMovies.writeAsText("/Users/nitin.bs/Downloads/ml-latest-small/filtered-output/");
+        filteredMovies.writeAsText("./output_files/filtered-output/");
         env.execute();
     }
 }
